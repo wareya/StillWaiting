@@ -15,10 +15,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ```
 
 Assets used:
+
 https://opengameart.org/content/lowpoly-survival-pack
+
 https://opengameart.org/content/lowpoly-rpg-characters
+
 https://opengameart.org/content/animated-mech-pack
+
 https://opengameart.org/content/tileable-grass-textures-set-1
+
 https://opengameart.org/content/tileable-bricks-ground-textures-set-1
+
+https://opengameart.org/content/mountain-skyboxes
 
 The map tile mesh geometry was hand-made in blender.

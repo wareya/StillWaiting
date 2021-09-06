@@ -213,7 +213,7 @@ func place_object(object : Node, dist_from = null, min_dist = 10) -> Array:
 func add_tile_child(target_gridmap : GridMap, x : float, y : float, type : int, angle : float):
     #angle = floor(angle/90+0.5)*90
     #print(angle)
-    if false:
+    if true:
         if angle == 0:
             target_gridmap.set_cell_item(x, 0, y, type, 10)
         elif angle == 90:
