@@ -1,0 +1,137 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/ui/bar.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/barover.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/barempty.png" type="Texture" id=3]
+[ext_resource path="res://assets/Animated Mech Pack - March 2021/Leela.glb" type="PackedScene" id=4]
+[ext_resource path="res://Funmob.gd" type="Script" id=5]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("BBViewport")
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_fixed_size = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_texture = SubResource( 1 )
+distance_fade_mode = 2
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 9.0
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("BBViewport")
+
+[sub_resource type="CapsuleShape" id=4]
+margin = 0.001
+radius = 0.4
+height = 0.8
+
+[sub_resource type="CylinderShape" id=5]
+radius = 1.97645
+height = 0.635343
+
+[node name="Funmob" type="KinematicBody" groups=[
+"Enemy",
+]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 5 )
+
+[node name="BBViewport" type="Viewport" parent="."]
+size = Vector2( 128, 64 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Stuffholder" type="Control" parent="BBViewport"]
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="TextureProgress" parent="BBViewport/Stuffholder"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.513
+margin_left = 4.0
+margin_top = -8.0
+margin_right = -4.0
+margin_bottom = 3.168
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0.254902, 0.2, 0.188235, 1 )
+tint_progress = Color( 0.945098, 0.188235, 0.0627451, 1 )
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="BBViewport/Stuffholder"]
+visible = false
+anchor_left = 0.05
+anchor_right = 0.05
+anchor_bottom = 0.089
+margin_left = 72.0
+margin_top = 8.0
+margin_right = 128.0
+margin_bottom = 22.0
+text = "asdfasdf"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Billboard" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67929, 0 )
+material_override = SubResource( 2 )
+cast_shadow = 0
+pixel_size = 0.001
+billboard = 1
+texture = SubResource( 3 )
+
+[node name="Blocker" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.810419, 0 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape" parent="Blocker"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37987e-16, -3.40938e-08, -0.779975 )
+shape = SubResource( 4 )
+
+[node name="Collider" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.810419, 0 )
+shape = SubResource( 4 )
+
+[node name="Holder" type="Spatial" parent="."]
+transform = Transform( 0.294445, 0, 0, 0, 0.294445, 0, 0, 0, 0.294445, 0, 0.005413, 0.0582004 )
+
+[node name="Leela" parent="Holder" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="Hitcast" type="Area" parent="Holder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.40815, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Holder/Hitcast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69355e-07, 0, -2.00497 )
+shape = SubResource( 5 )
+
+[node name="Finder" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -10 )
+collision_mask = 3

@@ -1,0 +1,199 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://SaveData.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/bar.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/barover.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/barempty.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/MeriendaOne-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("DeathOverlay:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Victory"
+tracks/0/type = "value"
+tracks/0/path = NodePath("VictoryOverlay:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 0.0 ]
+}
+
+[node name="SaveData" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -640.0
+margin_right = 640.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -456.0
+margin_top = 48.0
+margin_right = -136.0
+margin_bottom = 64.0
+value = 50.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+tint_over = Color( 1, 0.760784, 0.52549, 1 )
+tint_progress = Color( 0.34902, 0.909804, 0.647059, 1 )
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="HUD/HPBar"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -16.0
+margin_right = 56.0
+margin_bottom = 16.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+bbcode_enabled = true
+bbcode_text = "[center]32/32[/center]"
+text = "32/32"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathOverlay" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -640.0
+margin_right = 640.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="DeathOverlay"]
+anchor_left = 0.5
+anchor_top = 0.011
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_top = 248.08
+margin_right = 256.0
+margin_bottom = -272.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+text = "Game Over"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VictoryOverlay" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -640.0
+margin_right = 640.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VictoryOverlay"]
+anchor_left = 0.5
+anchor_top = 0.011
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_top = 248.08
+margin_right = 256.0
+margin_bottom = -272.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+text = "Enemies Eliminated"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OverlayAnimator" type="AnimationPlayer" parent="."]
+anims/Death = SubResource( 3 )
+anims/Victory = SubResource( 4 )
