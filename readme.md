@@ -1,4 +1,6 @@
-A proof-of-concept 3d game with randomly generated labyrinths.
+STILL WAITING for godot's 3d physics and collision detection (specifically `move_and_slide`) to stop being extremely buggy.
+
+A proof-of-concept 3d dungeon action game with randomly generated labyrinth layouts.
 
 Licensed under the MIT license.
 
