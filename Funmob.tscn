@@ -38,9 +38,7 @@ height = 0.8
 radius = 1.97645
 height = 0.635343
 
-[node name="Funmob" type="KinematicBody" groups=[
-"Enemy",
-]]
+[node name="Funmob" type="KinematicBody" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 5 )

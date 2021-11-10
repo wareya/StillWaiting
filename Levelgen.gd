@@ -444,6 +444,8 @@ func gen_level(target_gridmap : GridMap):
             elif index == Vector2(9, 2):
                 add_tile_child(target_gridmap, x, y, 0, 0)
     
+    target_gridmap.make_baked_meshes(false)
+    
     #var entrance_pos = add_object(preload("res://stuff/StairUp.tscn"))
     #var exit_pos = add_object(preload("res://stuff/StairDown.tscn"), entrance_pos, (virt_w+virt_h)/2*0.5)
     add_object(preload("res://Player.tscn"))

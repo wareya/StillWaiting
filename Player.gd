@@ -42,12 +42,12 @@ func make_anim_loop(anim : String):
     idle_anim.loop = true
 
 func randomize_angle():
-    print("randomizing angle")
+    #print("randomizing angle")
     var angle = rng.randf()*PI*2
     $Warrior.rotation.y = angle
     lookdir.x = -sin(angle)
     lookdir.z = -cos(angle)
-    print(lookdir)
+    #print(lookdir)
     $CameraHolder.rotation.y = angle
 
 func play_attack_anim(animator : AnimationPlayer):
@@ -113,9 +113,9 @@ var base_origin = Vector3()
 var tip_origin = Vector3()
 func _process(delta):
     if first_frame:
-        print("mapping down from " + str(global_transform.origin.y) + "...")
+        #print("mapping down from " + str(global_transform.origin.y) + "...")
         custom_move_and_slide(0.5, Vector3.DOWN*0.25)
-        print(floor_collision)
+        #print(floor_collision)
     #print(global_transform.origin.y)
     first_frame = false
     
@@ -137,10 +137,12 @@ func _process(delta):
     if Input.is_action_pressed("ui_down"):
         wishdir += Vector3.BACK
     
-    wishdir += Vector3.RIGHT   * Input.get_action_strength("stick_right")
-    wishdir += Vector3.LEFT    * Input.get_action_strength("stick_left")
-    wishdir += Vector3.FORWARD * Input.get_action_strength("stick_up")
-    wishdir += Vector3.BACK    * Input.get_action_strength("stick_down")
+    #wishdir += Vector3.RIGHT   * Input.get_action_strength("stick_right")
+    #wishdir += Vector3.LEFT    * Input.get_action_strength("stick_left")
+    #wishdir += Vector3.FORWARD * Input.get_action_strength("stick_up")
+    #wishdir += Vector3.BACK    * Input.get_action_strength("stick_down")
+    var asdf = Input.get_vector("stick_left", "stick_right", "stick_up", "stick_down", 0.15)
+    wishdir += Vector3(asdf.x, 0.0, asdf.y)
     
     if wishdir.length_squared() > 1:
         wishdir = wishdir.normalized()
@@ -212,7 +214,7 @@ func _process(delta):
     var actual_speed = motion_delta.length()/delta
     var not_moving = false
     if is_on_floor():
-        if actual_speed < 0.1:
+        if false:#actual_speed < 0.1:
             global_transform.origin = oldpos
             velocity = oldvel
             velocity.y = 0
@@ -233,7 +235,7 @@ func _process(delta):
     
     var hvel = Vector3(velocity.x, 0, velocity.z)
     var lookvec = hvel.normalized() + wishdir
-    print(wishdir.length())
+    #print(wishdir.length())
     if wishdir.length() > 0.85:
         lookvec = wishdir
     
@@ -306,7 +308,8 @@ func _process(delta):
     
     var autocam_speed = 90
     if !not_moving and autocam_enabled:
-        var autocam_amount = -wishmod*delta*raw_wishdir.x*autocam_speed*(0.5+raw_wishdir.z/2)
+        #var autocam_amount = -wishmod*delta*raw_wishdir.x*autocam_speed*(0.5+raw_wishdir.z/2)
+        var autocam_amount = -wishmod*delta*raw_wishdir.x*autocam_speed
         var camdist = $CameraHolder.rotation_degrees.x+80.0
         camdist /= 100.0
         #print(camdist)
@@ -361,7 +364,7 @@ func _process(delta):
     
     var bone : BoneAttachment
     var skeleton : Skeleton = $Warrior.find_node("Skeleton")
-    var sword_transform = skeleton.get_bone_global_pose(skeleton.find_bone("weapon_r"))
+    var sword_transform = skeleton.get_bone_global_pose(skeleton.find_bone("Weapon.R"))
     $SwordHelper.transform = $Warrior.transform*sword_transform
     
     attempt_spawn_sword_mesh()

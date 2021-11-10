@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://maptest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Funmob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/cubemap/Teide/panorama.jpg" type="Texture" id=4]
+[ext_resource path="res://HPKit.tscn" type="PackedScene" id=5]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 4 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.411765, 0.384314, 0.384314, 1 )
+ambient_light_sky_contribution = 0.0
+
+[node name="Main" type="Spatial"]
+
+[node name="Funmob" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1277, 0, 9.11306 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76178, 0, -3.61426 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.769522, -0.570317, -0.287358, 0.0866107, -0.539011, 0.837834, -0.63272, 0.619843, 0.464177, -2.04524, 4.09493, -1.95938 )
+light_specular = 0.58
+shadow_enabled = true
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.1
+directional_shadow_split_3 = 0.25
+directional_shadow_normal_bias = 0.1
+directional_shadow_bias_split_scale = 0.1
+
+[node name="HPKit" parent="." instance=ExtResource( 5 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="maptest" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.61411, 0, 0 )
